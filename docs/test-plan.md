@@ -21,10 +21,10 @@ Automated tests with pytest, designed from the spec (not from reading the code),
 | `test_discounts.py` (boundaries at 500 and 1000) | REQ-04 | Boundary values | Written |
 | `test_shipping.py` (free-shipping threshold) | REQ-08 | Boundary values | Partly written |
 | `test_checkout.py` (totals and rounding) | REQ-10, REQ-11 | Example-based | Partly written |
-| Coupons: codes, case, WELCOME5 minimum, FREESHIP | REQ-05, 06, 07 | Equivalence + boundary | **TODO (yours)** |
-| Express delivery | REQ-09 | Decision table | **TODO (yours)** |
-| Invalid items and empty cart | REQ-01, 02 | Equivalence | **TODO (yours)** |
-| Subtotal with several items | REQ-03 | Example-based | **TODO (yours)** |
+| Coupons: codes, case, WELCOME5 minimum, FREESHIP | REQ-05, 06, 07 | Equivalence + boundary | Written |
+| Express delivery | REQ-09 | Decision table | Written |
+| Invalid items and empty cart | REQ-01, 02 | Equivalence | Written |
+| Subtotal with several items | REQ-03 | Example-based | Written |
 
 ## 5. Defect log
 Record every real defect in `docs/bugs/BUG-001.md`, `BUG-002.md`, ... using `bug-report-template.md`.
@@ -32,4 +32,4 @@ Record every real defect in `docs/bugs/BUG-001.md`, `BUG-002.md`, ... using `bug
 ## 6. Risks
 - The spec may be ambiguous. Log a question rather than guess.
 - Money rounding is an easy place for defects to hide.
-   - The spec does not say whether an invalid item is rejected when it is created or at checkout, so the tests create the item inside the checkout block and accept either.
+- The spec does not say whether an invalid item is rejected when it is created or at checkout, so the tests create the item inside the checkout block and accept either.
