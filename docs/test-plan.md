@@ -32,3 +32,4 @@ Record every real defect in `docs/bugs/BUG-001.md`, `BUG-002.md`, ... using `bug
 ## 6. Risks
 - The spec may be ambiguous. Log a question rather than guess.
 - Money rounding is an easy place for defects to hide.
+   - The spec does not say whether an invalid item is rejected when it is created or at checkout, so the tests create the item inside the checkout block and accept either.
