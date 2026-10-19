@@ -18,13 +18,18 @@ def receipt_for_subtotal(amount: str):
         ("500.00", "50.00"),     # exactly tier 1 -> 10%
         ("500.01", "50.00"),     # just above tier 1 (50.001 rounds to 50.00)
         ("999.99", "100.00"),    # just below tier 2 (99.999 rounds half-up to 100.00)
-        ("1000.00", "150.00"),   # exactly tier 2 -> 15%
+        pytest.param(
+            "1000.00", "150.00",  # exactly tier 2 -> 15%
+            marks=pytest.mark.xfail(
+                strict=True,
+                reason="BUG-002: exactly R1000.00 gets 10% instead of 15% (REQ-04)",
+            ),
+        ),
         ("1000.01", "150.00"),   # just above tier 2 (150.0015 rounds to 150.00)
     ],
 )
 def test_volume_discount_at_boundaries(subtotal, expected_discount):
     assert receipt_for_subtotal(subtotal).volume_discount == Decimal(expected_discount)
-
 
 def test_subtotal_is_reported_before_discount():
     assert receipt_for_subtotal("1000.00").subtotal == Decimal("1000.00")

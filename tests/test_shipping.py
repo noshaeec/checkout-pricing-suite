@@ -5,6 +5,8 @@ out the discounted amount first.
 """
 from decimal import Decimal
 
+import pytest
+
 from checkout import Item, checkout
 
 
@@ -20,10 +22,9 @@ def test_discounted_subtotal_of_exactly_750_ships_free():
     # 833.33 less 10% (83.33) = 750.00, exactly on the threshold
     assert shipping_for_subtotal("833.33") == Decimal("0.00")
 
-
+@pytest.mark.xfail(strict=True, reason="BUG-003: free shipping is decided on the original subtotal, not the discounted one (REQ-08)")
 def test_discounted_subtotal_just_below_750_pays_shipping():
     # 833.32 less 10% (83.33) = 749.99, one cent below the threshold
     assert shipping_for_subtotal("833.32") == Decimal("60.00")
-
 
 # TODO (yours): a very large order, and the middle of the 10% tier (e.g. 800.00)

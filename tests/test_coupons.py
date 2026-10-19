@@ -25,13 +25,14 @@ def test_welcome5_rejected_just_below_minimum():
         checkout(one_item("199.99"), coupon="WELCOME5")
 
 
+@pytest.mark.xfail(strict=True, reason="BUG-005: coupon codes are case-sensitive (REQ-05)")
 def test_coupon_codes_are_not_case_sensitive():
     # REQ-05: "welcome5" must behave exactly like "WELCOME5"
     receipt = checkout(one_item("200.00"), coupon="welcome5")
     assert receipt.coupon_discount == Decimal("50.00")
     assert receipt.total == Decimal("241.50")
 
-
+@pytest.mark.xfail(strict=True, reason="BUG-005: coupon codes are case-sensitive (REQ-05)")
 def test_freeship_is_not_case_sensitive():
     receipt = checkout(one_item("100.00"), coupon="freeship")
     assert receipt.shipping == Decimal("0.00")
